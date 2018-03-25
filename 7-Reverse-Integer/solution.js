@@ -7,21 +7,24 @@ var reverse = function (x) {
     // 结尾是0的数
     // 32bit 返回0
     let isNegative = x < 0
-    let arr = []
+    let reversed = 0
     x = Math.abs(x)
 
 
     while (x !== 0) {
-        let current = Math.round((x / 10 - Math.floor(x / 10)) * 10)
-        arr.push(current)
-        x = Math.floor(x / 10)
+        let current = x % 10
+        reversed *= 10
+        reversed += current
+        x = (x - current) / 10
     }
-    let result =  Number((isNegative ? '-' : '') + arr.join(''))
     // capture greater than 32bit
-    if (Math.abs(result) > Math.pow(2, 31) - 1) {
+    if (Math.abs(reversed) > Math.pow(2, 31) - 1) {
         return 0;
     }
-    return result
+    if (isNegative) {
+        reversed *= -1
+    }
+    return reversed
 
 };
 
