@@ -8,6 +8,7 @@ var reverse = function (x) {
     // 32bit 返回0
     let isNegative = x < 0
     let reversed = 0
+    let MAX = Math.pow(2, 31) - 1
     x = Math.abs(x)
 
 
@@ -16,11 +17,13 @@ var reverse = function (x) {
         reversed *= 10
         reversed += current
         x = (x - current) / 10
+
+
     }
-    // capture greater than 32bit
-    if (Math.abs(reversed) > Math.pow(2, 31) - 1) {
+    if (reversed > MAX) {
         return 0;
     }
+
     if (isNegative) {
         reversed *= -1
     }
